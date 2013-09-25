@@ -384,6 +384,7 @@ function generateCat()
 			}, {x:1,y:1});
 		}
 	}
+	download();
 }
 //Нарисовать объект
 function add(func, scale){
@@ -429,6 +430,14 @@ function drawLine(ctx, vec1, vec2, fillColor, strokeColor, width)
 	ctx.stroke();
 
 
+}
+
+function download()
+{
+	downloadCanvas = document.getElementById("canvas");
+	downloadLink = document.getElementById("download");
+	downloadLink.href = downloadCanvas.toDataURL('image/png');
+	downloadLink.download = "RandomCat " + Math.round(Math.sRandom(999999,100000)) + ".png";
 }
 
 
