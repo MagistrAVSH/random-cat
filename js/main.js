@@ -8,14 +8,34 @@ $(document).ready(function() {
 	//Генерируем случайного кота
 	generateCat();
 	//Вешаем на кнопку событие
-	$("#generate").bind("click", function(){	
+	$("#generate").bind("click", function(){
+		Math.startSeed = Math.seed =  Math.random();
 		generateCat();	
 	});
+	$("#live").bind("click", function(){
+	    Math.live[ Math.floor( Math.liveMax*Math.random() ) ] = Math.random()/170+0.001;
+	    console.log( Math.live );
+	});
+	liveCat();
 });
+
+function liveCat() {
+	Math.seed = Math.startSeed;
+	Math.liveReset()
+	generateCat();	
+	window.requestAnimFrame( liveCat );
+}
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ){
+             window.setTimeout(callback, 1000 / 60);
+         };
+})();
 //Функция генерации случайного кота
 function generateCat()
 {
-	Math.seed = Math.random();
 	//Чистим сцену
 	Graphics.clear();
 	//--Генерим круг
